@@ -3,7 +3,7 @@ class StoryEntity {
   final String userImageUrl;
   final String userTag;
 
-  StoryEntity({
+  const StoryEntity({
     required this.storyId,
     required this.userImageUrl,
     required this.userTag,

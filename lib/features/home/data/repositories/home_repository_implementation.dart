@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:gdsc_social/core/errors/error_categorizer.dart';
 import 'package:gdsc_social/core/errors/failure.dart';
+import 'package:gdsc_social/features/home/domain/entities/post_entity.dart';
 import 'package:gdsc_social/features/home/domain/entities/story_entity.dart';
 
 import '../../domain/repositories/home_repository.dart';
@@ -21,6 +22,16 @@ class HomeRepositoryImplementation implements HomeRepository {
     try {
       final stories = await _remoteDataSource.getStories();
       return Right(stories);
+    } on Exception catch (e) {
+      return Left(ErrorCategorizer.categorizeError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getPosts() async {
+    try {
+      final posts = await _remoteDataSource.getPosts();
+      return Right(posts);
     } on Exception catch (e) {
       return Left(ErrorCategorizer.categorizeError(e));
     }
