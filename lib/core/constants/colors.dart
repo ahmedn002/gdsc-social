@@ -11,4 +11,7 @@ class AppColors {
   static const secondaryText = Color(0xFFB7B7B7);
   static const tertiaryText = Color(0xFF848484);
   static const elevation = Color(0xFF1E1E1E);
+  static const red = Color(0xFFFF2C25);
+  static const green = Color(0xFF01A050);
+  static const yellow = Color(0xFFFFBA02);
 }

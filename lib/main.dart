@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_social/core/constants/colors.dart';
+import 'package:gdsc_social/core/utils/bloc_observer.dart';
 import 'package:gdsc_social/core/utils/general.dart';
-import 'package:gdsc_social/features/home/presentation/view/home_screen.dart';
+import 'package:gdsc_social/core/utils/locator.dart';
+import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
+import 'package:get_it/get_it.dart';
+
+import 'features/home/data/repositories/home_repository_implementation.dart';
+import 'features/home/domain/use cases/get_stories_use_case.dart';
+import 'features/home/view/ui/home_screen.dart';
+
+final GetIt locator = GetIt.instance;
 
 void main() {
+  init();
   runApp(const App());
+}
+
+void init() {
+  Locator.init(); // Initializing singleton instances
+  Bloc.observer = CustomBlocObserver();
 }
 
 class App extends StatelessWidget {
@@ -13,15 +29,26 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(useMaterial3: true).copyWith(
-          scaffoldBackgroundColor: AppColors.background,
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: GeneralUtils.createMaterialColor(AppColors.accent),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<StoriesCubit>(
+            create: (context) => StoriesCubit(
+              GetStoriesUseCase(Locator.get<HomeRepositoryImplementation>()),
+            )..getStories(),
           ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(useMaterial3: true).copyWith(
+            scaffoldBackgroundColor: AppColors.background,
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: GeneralUtils.createMaterialColor(AppColors.accent),
+            ),
+            iconTheme: const IconThemeData(color: AppColors.primaryText),
+            splashColor: AppColors.elevation,
+          ),
+          home: const HomeScreen(),
         ),
-        home: const HomeScreen(),
       ),
     );
   }
