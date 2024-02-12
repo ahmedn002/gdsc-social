@@ -4,6 +4,8 @@ import 'package:gdsc_social/core/constants/colors.dart';
 import 'package:gdsc_social/core/utils/bloc_observer.dart';
 import 'package:gdsc_social/core/utils/general.dart';
 import 'package:gdsc_social/core/utils/locator.dart';
+import 'package:gdsc_social/features/home/domain/use%20cases/get_posts_use_case.dart';
+import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -34,8 +36,15 @@ class App extends StatelessWidget {
           BlocProvider<StoriesCubit>(
             create: (context) => StoriesCubit(
               GetStoriesUseCase(Locator.get<HomeRepositoryImplementation>()),
-            )..getStories(),
+            ),
           ),
+          BlocProvider<PostsCubit>(
+            create: (context) => PostsCubit(
+              GetPostsUseCase(
+                Locator.get<HomeRepositoryImplementation>(),
+              ),
+            ),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

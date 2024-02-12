@@ -9,9 +9,11 @@ part 'stories_state.dart';
 class StoriesCubit extends Cubit<StoriesState> {
   final GetStoriesUseCase getStoriesUseCase;
 
-  StoriesCubit(this.getStoriesUseCase) : super(StoriesInitial());
+  StoriesCubit(this.getStoriesUseCase) : super(StoriesInitial()) {
+    _getStories();
+  }
 
-  Future<void> getStories() async {
+  Future<void> _getStories() async {
     emit(StoriesLoading());
     final result = await getStoriesUseCase();
     result.fold(

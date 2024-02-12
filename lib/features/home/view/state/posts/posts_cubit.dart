@@ -9,9 +9,11 @@ part 'posts_state.dart';
 class PostsCubit extends Cubit<PostsState> {
   final GetPostsUseCase getPostsUseCase;
 
-  PostsCubit(this.getPostsUseCase) : super(PostsInitial());
+  PostsCubit(this.getPostsUseCase) : super(PostsInitial()) {
+    _getPosts();
+  }
 
-  Future<void> getPosts() async {
+  Future<void> _getPosts() async {
     emit(PostsLoading());
     final result = await getPostsUseCase();
     result.fold(

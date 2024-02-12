@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_social/core/constants/measurements.dart';
+import 'package:gdsc_social/features/home/view/ui/components/posts_section_bloc_builder.dart';
 import 'package:gdsc_social/features/home/view/ui/components/stories_section_bloc_builder.dart';
 import 'package:gdsc_social/features/widgets/screen/app_bar.dart';
 import 'package:gdsc_social/features/widgets/screen/main_scaffold.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 35),
         ]),
       ),
-      lowerBody: Placeholder(),
+      lowerBody: PostsSectionBlocBuilder(),
     );
   }
 }
