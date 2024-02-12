@@ -9,51 +9,47 @@ class StoryCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight,
-            maxWidth: constraints.maxHeight,
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 1, // Square
-                  child: Padding(
-                    padding: const EdgeInsets.all(2), // Because the custom painter gets slightly cut off
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned.fill(
-                          child: Padding(
-                            padding: const EdgeInsets.all(2), // Padding between the circle and the border
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(story.userImageUrl),
-                            ),
-                          ),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: 80,
+        maxWidth: 80,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: AspectRatio(
+              aspectRatio: 1, // Square
+              child: Padding(
+                padding: const EdgeInsets.all(2), // Because the custom painter gets slightly cut off
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned.fill(
+                      child: Padding(
+                        padding: const EdgeInsets.all(2), // Padding between the circle and the border
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(story.userImageUrl),
                         ),
-                        Positioned.fill(
-                          child: CustomPaint(
-                            painter: StoryBorderPainter(),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: StoryBorderPainter(),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                '@${story.userTag}',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.secondaryText),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+            ),
           ),
-        );
-      },
+          const SizedBox(height: 4),
+          Text(
+            '@${story.userTag}',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.secondaryText),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -14,6 +14,7 @@ class StoriesSection extends StatelessWidget {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
       itemCount: stories.length + 1,
       itemBuilder: (context, index) {
         return Center(

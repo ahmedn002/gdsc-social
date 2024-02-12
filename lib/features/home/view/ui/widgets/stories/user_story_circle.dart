@@ -8,50 +8,46 @@ class UserStoryCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme styles = Theme.of(context).textTheme;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight,
-            maxWidth: constraints.maxHeight,
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    const Positioned.fill(
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.elevation,
-                        backgroundImage: NetworkImage('https://avatar.iran.liara.run/public/boy?username=Ahmed'),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: AppColors.darkerBackground,
-                          shape: BoxShape.circle,
-                        ),
-                        child: MainIconButton(
-                          icon: const Icon(Icons.add_rounded, size: 20),
-                          onPressed: () {},
-                        ),
-                      ),
-                    )
-                  ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: 80,
+        maxWidth: 80,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                const Positioned.fill(
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.elevation,
+                    backgroundImage: NetworkImage('https://avatar.iran.liara.run/public/boy?username=Ahmed'),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Your Story',
-                style: styles.labelSmall,
-              ),
-            ],
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: AppColors.darkerBackground,
+                      shape: BoxShape.circle,
+                    ),
+                    child: MainIconButton(
+                      icon: const Icon(Icons.add_rounded, size: 20),
+                      onPressed: () {},
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        );
-      },
+          const SizedBox(height: 4),
+          Text(
+            'Your Story',
+            style: styles.labelSmall,
+          ),
+        ],
+      ),
     );
   }
 }

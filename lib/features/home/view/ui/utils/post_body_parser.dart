@@ -34,6 +34,7 @@ class PostBodyParser {
   }
 
   static List<String> _tokenize(String body) {
+    // TODO: Handle tokenizing \n and \t.
     return body.split(' ');
   }
 
