@@ -1,4 +1,9 @@
 import 'package:gdsc_social/features/home/view/ui/utils/parsed_body.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post%20body/body_component.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post%20body/hashtag_component.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post%20body/link_component.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post%20body/mention_component.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post%20body/text_component.dart';
 
 class PostBodyParser {
   static ParsedBody parse(String body) {

@@ -1,62 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_social/core/constants/measurements.dart';
+import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
+import 'package:gdsc_social/features/home/view/ui/utils/post_body_parser.dart';
+import 'package:gdsc_social/features/home/view/ui/widgets/posts/post_card_body_section.dart';
+import 'package:gdsc_social/features/home/view/ui/widgets/posts/post_header.dart';
+import 'package:gdsc_social/features/widgets/misc/dashed_line.dart';
 
-import '../../../../../../core/constants/colors.dart';
-import '../../../../../widgets/actions/main_icon_button.dart';
 import '../../../../domain/entities/post_entity.dart';
 
 class PostCardTopSection extends StatelessWidget {
+  final PostEntity post;
   const PostCardTopSection({
     super.key,
     required this.post,
   });
 
-  final PostEntity post;
-
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    return Row(
+    return Column(
       children: [
-        CircleAvatar(
-          radius: 25,
-          backgroundImage: NetworkImage(post.userImageUrl),
-        ),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              post.username,
-              style: textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.bold,
+        PostHeader(post: post),
+        IntrinsicHeight(
+          child: Row(
+            children: [
+              (Measurements.postAvatarRadius - Measurements.threadLineCircleRadius).hs,
+              const DashedLine(),
+              (Measurements.postAvatarRadius + 8).hs,
+              Expanded(
+                child: PostCardBodySection(body: PostBodyParser.parse(post.body)),
               ),
-            ),
-            const SizedBox(height: 2),
-            Row(
-              children: [
-                Text(
-                  '@${post.userTag}',
-                  style: textTheme.labelSmall,
-                ),
-                const SizedBox(width: 4),
-                const CircleAvatar(
-                  radius: 2,
-                  backgroundColor: AppColors.secondaryText,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  post.timeAgo,
-                  style: textTheme.labelSmall,
-                ),
-              ],
-            ),
-          ],
-        ),
-        const Spacer(),
-        MainIconButton(
-          icon: const Icon(Icons.more_vert_rounded),
-          onPressed: () {},
-          filled: false,
+            ],
+          ),
         )
       ],
     );
