@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_social/core/constants/measurements.dart';
-import 'package:gdsc_social/features/home/view/ui/widgets/story_circle.dart';
-import 'package:gdsc_social/features/home/view/ui/widgets/user_story_circle.dart';
+import 'package:gdsc_social/features/home/view/ui/widgets/stories/story_circle.dart';
+import 'package:gdsc_social/features/home/view/ui/widgets/stories/user_story_circle.dart';
 
-import '../../../domain/entities/story_entity.dart';
+import '../../../../domain/entities/story_entity.dart';
 
 class StoriesSection extends StatelessWidget {
   final List<StoryEntity> stories;

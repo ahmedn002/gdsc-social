@@ -55,6 +55,15 @@ class App extends StatelessWidget {
             ),
             iconTheme: const IconThemeData(color: AppColors.primaryText),
             splashColor: AppColors.elevation,
+            textTheme: TextTheme(
+              labelMedium: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryText,
+                  ),
+              labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: AppColors.secondaryText,
+                  ),
+            ),
           ),
           home: const HomeScreen(),
         ),

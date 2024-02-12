@@ -34,11 +34,11 @@ class PostEntity {
 
   String _calculateTimeAgo() {
     if (minutesAgo < 60) {
-      return '$minutesAgo minutes ago';
+      return '${minutesAgo}m';
     } else if (minutesAgo < 60 * 24) {
-      return '${minutesAgo ~/ 60} hours ago';
+      return '${minutesAgo ~/ 60}h';
     } else {
-      return '${minutesAgo ~/ 1440} days ago';
+      return '${minutesAgo ~/ (60 * 24)}d';
     }
   }
 }

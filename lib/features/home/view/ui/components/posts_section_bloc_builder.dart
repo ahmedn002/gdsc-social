@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 
-import '../widgets/post_list.dart';
+import '../widgets/posts/post_list.dart';
 
 class PostsSectionBlocBuilder extends StatelessWidget {
   const PostsSectionBlocBuilder({super.key});

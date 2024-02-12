@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
 
-import '../widgets/stories_list.dart';
+import '../widgets/stories/stories_list.dart';
 
 class StoriesSectionBlocBuilder extends StatelessWidget {
   const StoriesSectionBlocBuilder({super.key});
