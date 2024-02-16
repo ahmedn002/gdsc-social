@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_social/features/widgets/misc/custom_circle_avatar.dart';
 
 import '../../../../../../core/constants/colors.dart';
 import '../../../../../widgets/actions/main_icon_button.dart';
@@ -15,9 +16,9 @@ class PostHeader extends StatelessWidget {
       children: [
         Column(
           children: [
-            CircleAvatar(
+            CustomCircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(post.userImageUrl),
+              imageUrl: post.userImageUrl,
             ),
           ],
         ),

@@ -7,15 +7,15 @@ import '../../../domain/use cases/get_posts_use_case.dart';
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
-  final GetPostsUseCase getPostsUseCase;
+  final GetPostsUseCase _getPostsUseCase;
 
-  PostsCubit(this.getPostsUseCase) : super(PostsInitial()) {
+  PostsCubit(this._getPostsUseCase) : super(PostsInitial()) {
     _getPosts();
   }
 
   Future<void> _getPosts() async {
     emit(PostsLoading());
-    final result = await getPostsUseCase();
+    final result = await _getPostsUseCase();
     result.fold(
       (failure) => emit(PostsFailure(failure.message)),
       (posts) => emit(PostsSuccess(posts)),

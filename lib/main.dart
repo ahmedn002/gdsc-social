@@ -7,11 +7,14 @@ import 'package:gdsc_social/core/utils/locator.dart';
 import 'package:gdsc_social/features/home/domain/use%20cases/get_posts_use_case.dart';
 import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
+import 'package:gdsc_social/features/splash/view/ui/splash_screen.dart';
+import 'package:gdsc_social/features/story/domain/use%20cases/get_stories_use_case.dart';
+import 'package:gdsc_social/features/story/view/state/story/story_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'features/home/data/repositories/home_repository_implementation.dart';
 import 'features/home/domain/use cases/get_stories_use_case.dart';
-import 'features/home/view/ui/home_screen.dart';
+import 'features/story/data/repositories/repository_implementation.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -40,11 +43,14 @@ class App extends StatelessWidget {
           ),
           BlocProvider<PostsCubit>(
             create: (context) => PostsCubit(
-              GetPostsUseCase(
-                Locator.get<HomeRepositoryImplementation>(),
-              ),
+              GetPostsUseCase(Locator.get<HomeRepositoryImplementation>()),
             ),
-          )
+          ),
+          BlocProvider<StoryCubit>(
+            create: (context) => StoryCubit(
+              GetStoryUseCase(Locator.get<StoryRepositoryImplementation>()),
+            ),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -65,7 +71,7 @@ class App extends StatelessWidget {
                   ),
             ),
           ),
-          home: const HomeScreen(),
+          home: const SplashScreen(),
         ),
       ),
     );

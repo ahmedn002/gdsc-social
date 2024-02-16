@@ -1,10 +1,11 @@
-import 'dart:developer';
-
+import 'package:gdsc_social/features/story/data/repositories/repository_implementation.dart';
+import 'package:gdsc_social/features/story/data/sources/story_remote_data_source.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/home/data/repositories/home_repository_implementation.dart';
 import '../../features/home/data/sources/home_local_data_source.dart';
 import '../../features/home/data/sources/home_remote_data_source.dart';
+import '../../features/story/data/sources/story_local_data_source.dart';
 
 class Locator {
   static final GetIt _getIt = GetIt.instance;
@@ -14,12 +15,13 @@ class Locator {
       remoteDataSource: HomeRemoteDataSourceImplementation(),
       localDataSource: HomeLocalDataSourceImplementation(),
     );
-
-    // Registering the instance
     _getIt.registerSingleton<HomeRepositoryImplementation>(homeRepositoryImplementationInstance);
 
-    // Checking if the instance is registered
-    log(_getIt.isRegistered<HomeRepositoryImplementation>().toString());
+    final StoryRepositoryImplementation storyRepositoryImplementationInstance = StoryRepositoryImplementation(
+      remoteDataSource: StoryRemoteDataSourceImplementation(),
+      localDataSource: StoryLocalDataSourceImplementation(),
+    );
+    _getIt.registerSingleton<StoryRepositoryImplementation>(storyRepositoryImplementationInstance);
   }
 
   static T get<T extends Object>() {

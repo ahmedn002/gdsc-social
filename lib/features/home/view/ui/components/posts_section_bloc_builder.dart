@@ -12,13 +12,13 @@ class PostsSectionBlocBuilder extends StatelessWidget {
     return BlocBuilder<PostsCubit, PostsState>(
       builder: (context, state) {
         if (state is PostsLoading) {
-          return SliverToBoxAdapter(child: const CircularProgressIndicator());
+          return const SliverToBoxAdapter(child: CircularProgressIndicator());
         } else if (state is PostsSuccess) {
           return PostList(posts: state.posts);
         } else if (state is PostsFailure) {
           return SliverToBoxAdapter(child: Text(state.message));
         } else {
-          return SliverToBoxAdapter(child: const SizedBox.shrink());
+          return const SliverToBoxAdapter(child: SizedBox.shrink());
         }
       },
     );

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:gdsc_social/features/home/domain/entities/story_entity.dart';
-import 'package:gdsc_social/features/home/domain/repositories/home_repository.dart';
+import 'package:gdsc_social/features/home/domain/repositories/home_repository_abstraction.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../../../core/use case/no_params.dart';

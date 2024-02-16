@@ -1,36 +1,41 @@
 import 'package:gdsc_social/core/utils/stub.dart';
+import 'package:gdsc_social/features/home/data/models/story_model.dart';
 
-import '../../domain/entities/story_entity.dart';
-
-final List<StoryEntity> storyStubs = [
-  StoryEntity(
-    storyId: '1',
-    userImageUrl: StubUtils.getRandomAvatar(true),
-    userTag: 'JaneDoe',
+final List<StoryModel> storyStubs = [
+  StoryModel(
+    id: '1',
+    tag: 'JohnDoe',
+    userName: 'John Doe',
+    userImage: StubUtils.getRandomAvatar(false),
   ),
-  StoryEntity(
-    storyId: '2',
-    userImageUrl: StubUtils.getRandomAvatar(),
-    userTag: 'JohnDoe12',
+  StoryModel(
+    id: '2',
+    tag: 'JaneDoe',
+    userName: 'Jane Doe',
+    userImage: StubUtils.getRandomAvatar(true),
   ),
-  StoryEntity(
-    storyId: '3',
-    userImageUrl: StubUtils.getRandomAvatar(true),
-    userTag: 'JannaDoe30',
+  StoryModel(
+    id: '3',
+    tag: 'JohnathanDoe',
+    userName: 'Johnathan Doe',
+    userImage: StubUtils.getRandomAvatar(false),
   ),
-  StoryEntity(
-    storyId: '4',
-    userImageUrl: StubUtils.getRandomAvatar(true),
-    userTag: 'JanetDoe21',
+  StoryModel(
+    id: '4',
+    tag: 'JaneyDoe',
+    userName: 'Janey Doe',
+    userImage: StubUtils.getRandomAvatar(true),
   ),
-  StoryEntity(
-    storyId: '5',
-    userImageUrl: StubUtils.getRandomAvatar(),
-    userTag: 'JonathonDoe',
+  StoryModel(
+    id: '5',
+    tag: 'JohnnyDoe',
+    userName: 'Johnny Doe',
+    userImage: StubUtils.getRandomAvatar(false),
   ),
-  StoryEntity(
-    storyId: '6',
-    userImageUrl: StubUtils.getRandomAvatar(true),
-    userTag: 'JennyDoe',
+  StoryModel(
+    id: '6',
+    tag: 'JanetDoe',
+    userName: 'Janet Doe',
+    userImage: StubUtils.getRandomAvatar(true),
   ),
 ];
