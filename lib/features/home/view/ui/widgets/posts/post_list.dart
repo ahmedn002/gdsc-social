@@ -20,10 +20,12 @@ class _PostListState extends State<PostList> {
   @override
   void initState() {
     Future.delayed(3.seconds, () {
-      setState(() {
-        delay = 0;
-        animationDuration = 0.seconds;
-      });
+      if (mounted) {
+        setState(() {
+          delay = 0;
+          animationDuration = 0.seconds;
+        });
+      }
     });
     super.initState();
   }

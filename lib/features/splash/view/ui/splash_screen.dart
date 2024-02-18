@@ -5,9 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_social/core/constants/assets.dart';
 import 'package:gdsc_social/core/constants/colors.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
-import 'package:page_transition/page_transition.dart';
-
-import '../../../home/view/ui/home_screen.dart';
+import 'package:gdsc_social/core/routes/route_manager.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,23 +21,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     Future.delayed(3.seconds, () {
-      setState(() {
-        _isLoaded = true;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoaded = true;
+        });
+      }
     });
 
     Future.delayed(4.seconds, () {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-          child: const HomeScreen(),
-          type: PageTransitionType.scale,
-          alignment: Alignment.center,
-          duration: 2.seconds,
-          curve: Curves.easeOutExpo,
-        ),
-      );
+      context.go(Routes.home);
     });
   }
 

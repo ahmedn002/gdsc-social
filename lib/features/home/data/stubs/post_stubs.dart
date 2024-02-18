@@ -20,7 +20,7 @@ final List<PostEntity> postStubs = [
   PostEntity(
     postId: '2',
     userId: '2',
-    userImageUrl: StubUtils.getRandomAvatar(true),
+    userImageUrl: StubUtils.getRandomAvatar(girl: true),
     username: 'Jane Doe',
     userTag: 'janedoe',
     body: 'I just published a new article on https://www.medium.com check it out!',
@@ -35,7 +35,7 @@ final List<PostEntity> postStubs = [
   PostEntity(
     postId: '3',
     userId: '3',
-    userImageUrl: StubUtils.getRandomAvatar(true),
+    userImageUrl: StubUtils.getRandomAvatar(girl: true),
     username: 'Jane Doe',
     userTag: 'janedoe',
     body: 'Breaking news! #Flutter 2.5 is out now! Check out the release notes on the official page @FlutterOrg. #FlutterDev',
@@ -65,7 +65,7 @@ final List<PostEntity> postStubs = [
   PostEntity(
     postId: '5',
     userId: '5',
-    userImageUrl: StubUtils.getRandomAvatar(true),
+    userImageUrl: StubUtils.getRandomAvatar(girl: true),
     username: 'Jane Doe',
     userTag: 'janedoe',
     body: 'I just published a new article on https://www.medium.com check it out!',
@@ -80,7 +80,7 @@ final List<PostEntity> postStubs = [
   PostEntity(
     postId: '6',
     userId: '6',
-    userImageUrl: StubUtils.getRandomAvatar(true),
+    userImageUrl: StubUtils.getRandomAvatar(girl: true),
     username: 'Jane Doe',
     userTag: 'janedoe',
     body: 'Breaking news! #Flutter 2.5 is out now! Check out the release notes on the official page @FlutterOrg. #FlutterDev',

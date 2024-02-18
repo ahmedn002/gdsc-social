@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_social/core/constants/colors.dart';
+import 'package:gdsc_social/core/routes/route_manager.dart';
 import 'package:gdsc_social/core/utils/bloc_observer.dart';
 import 'package:gdsc_social/core/utils/general.dart';
 import 'package:gdsc_social/core/utils/locator.dart';
 import 'package:gdsc_social/features/home/domain/use%20cases/get_posts_use_case.dart';
 import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
-import 'package:gdsc_social/features/splash/view/ui/splash_screen.dart';
 import 'package:gdsc_social/features/story/domain/use%20cases/get_stories_use_case.dart';
 import 'package:gdsc_social/features/story/view/state/story/story_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 import 'features/home/data/repositories/home_repository_implementation.dart';
 import 'features/home/domain/use cases/get_stories_use_case.dart';
+import 'features/home/view/ui/home_screen.dart';
+import 'features/splash/view/ui/splash_screen.dart';
 import 'features/story/data/repositories/repository_implementation.dart';
+import 'features/story/view/ui/story_screen.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -27,6 +31,23 @@ void init() {
   Locator.init(); // Initializing singleton instances
   Bloc.observer = CustomBlocObserver();
 }
+
+final GoRouter _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: Routes.splash,
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: Routes.home,
+      builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: Routes.story,
+      builder: (context, state) => const StoryScreen(),
+    ),
+  ],
+);
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -52,7 +73,7 @@ class App extends StatelessWidget {
             ),
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(useMaterial3: true).copyWith(
             scaffoldBackgroundColor: AppColors.background,
@@ -71,7 +92,7 @@ class App extends StatelessWidget {
                   ),
             ),
           ),
-          home: const SplashScreen(),
+          routerConfig: _router,
         ),
       ),
     );
