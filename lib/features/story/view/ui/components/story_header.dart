@@ -11,7 +11,8 @@ import 'package:gdsc_social/features/widgets/input/text_input.dart';
 
 class StoryHeaderSection extends StatefulWidget {
   final StoryEntity story;
-  const StoryHeaderSection({super.key, required this.story});
+  final int currentIndex;
+  const StoryHeaderSection({super.key, required this.story, required this.currentIndex});
 
   @override
   State<StoryHeaderSection> createState() => _StoryHeaderSectionState();
@@ -29,7 +30,8 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
             for (var image in widget.story.storyImages) ...[
               Expanded(
                 child: LoadingBar(
-                  shouldLoad: true,
+                  fillProgress: widget.story.storyImages.indexOf(image) < widget.currentIndex,
+                  shouldLoad: widget.story.storyImages.indexOf(image) == widget.currentIndex,
                 ),
               ),
               if (image != widget.story.storyImages.last) 5.hs,

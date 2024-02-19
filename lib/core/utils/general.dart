@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 class GeneralUtils {
   static MaterialColor createMaterialColor(Color color) {
@@ -42,5 +43,12 @@ class GeneralUtils {
     } else {
       return 'Just now';
     }
+  }
+
+  static Future<PaletteGenerator> getPaletteFromImage(ImageProvider imageProvider) async {
+    return await PaletteGenerator.fromImageProvider(
+      imageProvider,
+      size: const Size(100, 100),
+    );
   }
 }
