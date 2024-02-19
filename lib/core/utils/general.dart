@@ -22,4 +22,25 @@ class GeneralUtils {
 
     return MaterialColor(color.value, swatch);
   }
+
+  static String parseDurationAsTimeAgo(Duration duration) {
+    if (duration.inDays > 365) {
+      final years = (duration.inDays / 365).floor();
+      return years == 1 ? '1 year ago' : '$years years ago';
+    } else if (duration.inDays > 30) {
+      final months = (duration.inDays / 30).floor();
+      return months == 1 ? '1 month ago' : '$months months ago';
+    } else if (duration.inDays > 7) {
+      final weeks = (duration.inDays / 7).floor();
+      return weeks == 1 ? '1 week ago' : '$weeks weeks ago';
+    } else if (duration.inDays > 0) {
+      return duration.inDays == 1 ? '1 day ago' : '${duration.inDays} days ago';
+    } else if (duration.inHours > 0) {
+      return duration.inHours == 1 ? '1 hour ago' : '${duration.inHours} hours ago';
+    } else if (duration.inMinutes > 0) {
+      return duration.inMinutes == 1 ? '1 minute ago' : '${duration.inMinutes} minutes ago';
+    } else {
+      return 'Just now';
+    }
+  }
 }

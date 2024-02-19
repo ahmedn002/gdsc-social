@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:gdsc_social/features/home/domain/entities/story_entity.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../story/domain/entities/story_entity.dart';
 import '../../../domain/use cases/get_stories_use_case.dart';
 
 part 'stories_state.dart';

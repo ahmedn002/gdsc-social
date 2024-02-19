@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gdsc_social/core/constants/colors.dart';
-import 'package:gdsc_social/core/constants/measurements.dart';
 import 'package:gdsc_social/core/utils/hero_tag.dart';
-import 'package:gdsc_social/features/home/domain/entities/story_entity.dart';
 import 'package:gdsc_social/features/home/view/ui/widgets/stories/story_border_custom_painter.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../story/domain/entities/story_entity.dart';
 import '../../../../../widgets/misc/custom_circle_avatar.dart';
 
 class StoryCircle extends StatelessWidget {
@@ -15,11 +15,14 @@ class StoryCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        // Go to story page and pass story as parameter
+        context.push('/story', extra: story);
+      },
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxHeight: Measurements.storyAvatarRadius * 2,
-          maxWidth: Measurements.storyAvatarRadius * 2,
+          maxHeight: 80,
+          maxWidth: 80,
         ),
         child: Column(
           children: [
@@ -38,7 +41,6 @@ class StoryCircle extends StatelessWidget {
                             tag: HeroTagUtils.generateStoryTag(story.storyId),
                             child: CustomCircleAvatar(
                               imageUrl: story.userImageUrl,
-                              radius: Measurements.storyAvatarRadius,
                             ),
                           ),
                         ),

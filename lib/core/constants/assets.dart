@@ -8,4 +8,6 @@ class AssetData {
   static const String commentSvg = 'assets/comment.svg';
   static const String shareSvg = 'assets/share.svg';
   static const String saveSvg = 'assets/save.svg';
+  static const String paperClipSvg = 'assets/paperclip.svg';
+  static const String paperPlaneSvg = 'assets/paperplane.svg';
 }

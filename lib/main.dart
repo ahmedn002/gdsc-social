@@ -8,8 +8,7 @@ import 'package:gdsc_social/core/utils/locator.dart';
 import 'package:gdsc_social/features/home/domain/use%20cases/get_posts_use_case.dart';
 import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
-import 'package:gdsc_social/features/story/domain/use%20cases/get_stories_use_case.dart';
-import 'package:gdsc_social/features/story/view/state/story/story_cubit.dart';
+import 'package:gdsc_social/features/story/view/state/stories%20view/stories_view_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +16,6 @@ import 'features/home/data/repositories/home_repository_implementation.dart';
 import 'features/home/domain/use cases/get_stories_use_case.dart';
 import 'features/home/view/ui/home_screen.dart';
 import 'features/splash/view/ui/splash_screen.dart';
-import 'features/story/data/repositories/repository_implementation.dart';
 import 'features/story/view/ui/story_screen.dart';
 
 final GetIt locator = GetIt.instance;
@@ -67,10 +65,8 @@ class App extends StatelessWidget {
               GetPostsUseCase(Locator.get<HomeRepositoryImplementation>()),
             ),
           ),
-          BlocProvider<StoryCubit>(
-            create: (context) => StoryCubit(
-              GetStoryUseCase(Locator.get<StoryRepositoryImplementation>()),
-            ),
+          BlocProvider<StoriesViewCubit>(
+            create: (context) => StoriesViewCubit(),
           ),
         ],
         child: MaterialApp.router(
@@ -81,6 +77,9 @@ class App extends StatelessWidget {
               primarySwatch: GeneralUtils.createMaterialColor(AppColors.accent),
             ),
             iconTheme: const IconThemeData(color: AppColors.primaryText),
+            inputDecorationTheme: const InputDecorationTheme(
+              iconColor: AppColors.primaryText,
+            ),
             splashColor: AppColors.elevation,
             textTheme: TextTheme(
               labelMedium: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -89,6 +88,10 @@ class App extends StatelessWidget {
                   ),
               labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: AppColors.secondaryText,
+                  ),
+              titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryText,
                   ),
             ),
           ),

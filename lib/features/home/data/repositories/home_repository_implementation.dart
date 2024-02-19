@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:gdsc_social/core/errors/error_categorizer.dart';
 import 'package:gdsc_social/core/errors/failure.dart';
 import 'package:gdsc_social/features/home/domain/entities/post_entity.dart';
-import 'package:gdsc_social/features/home/domain/entities/story_entity.dart';
 
+import '../../../story/domain/entities/story_entity.dart';
 import '../../domain/repositories/home_repository_abstraction.dart';
 import '../sources/home_local_data_source.dart';
 import '../sources/home_remote_data_source.dart';

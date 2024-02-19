@@ -1,11 +1,11 @@
 class StoryImageEntity {
   final String storyImageId;
   final String url;
-  final Duration time;
+  final String timeAgo;
 
   StoryImageEntity({
     required this.storyImageId,
     required this.url,
-    required this.time,
+    required this.timeAgo,
   });
 }

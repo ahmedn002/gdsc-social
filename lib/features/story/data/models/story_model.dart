@@ -5,14 +5,13 @@ import '../../domain/entities/story_entity.dart';
 class StoryModel extends StoryEntity {
   final String id;
   final String tag;
-  final String userName;
   final String userImage;
   final List<StoryImageModel> images;
 
   StoryModel({
     required this.id,
     required this.tag,
-    required this.userName,
+    required super.userName,
     required this.userImage,
     required this.images,
   }) : super(storyId: id, userTag: tag, userImageUrl: userImage, storyImages: images);

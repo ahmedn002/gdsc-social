@@ -12,7 +12,7 @@ final List<StoryModel> storyStubs = [
     images: [
       StoryImageModel(
         id: '1',
-        imageUrl: 'https://picsum.photos/200/300',
+        imageUrl: 'https://picsum.photos/1000/1500',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
       ),
       StoryImageModel(
