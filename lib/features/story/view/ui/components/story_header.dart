@@ -28,7 +28,9 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
           children: [
             for (var image in widget.story.storyImages) ...[
               Expanded(
-                child: LoadingBar(),
+                child: LoadingBar(
+                  shouldLoad: true,
+                ),
               ),
               if (image != widget.story.storyImages.last) 5.hs,
             ]
