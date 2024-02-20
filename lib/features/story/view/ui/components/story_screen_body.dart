@@ -5,11 +5,12 @@ import 'package:gdsc_social/core/utils/general.dart';
 import 'package:gdsc_social/features/story/domain/entities/story_entity.dart';
 import 'package:gdsc_social/features/story/view/ui/components/story_bottom_section.dart';
 import 'package:gdsc_social/features/story/view/ui/components/story_header.dart';
+import 'package:gdsc_social/features/story/view/ui/widgets/invisible_next_and_previous_buttons.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/story_image.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import '../../../../../core/constants/measurements.dart';
-import 'background_gradient.dart';
+import '../widgets/background_gradient.dart';
 
 class StoryScreenBody extends StatefulWidget {
   final StoryEntity story;
@@ -30,6 +31,8 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
   void initState() {
     super.initState();
     _updatePalette();
+
+    // Start loading the images
     _imageProviders = [
       for (var image in widget.story.storyImages) CachedNetworkImageProvider(image.url),
     ];
@@ -38,6 +41,8 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    // Precache the images
     for (var imageProvider in _imageProviders) {
       precacheImage(imageProvider, context);
     }
@@ -77,9 +82,20 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                   ),
                   Measurements.pageVerticalPadding.vs,
                   Expanded(
-                    child: StoryImage(
-                      imageUrl: widget.story.storyImages[_currentIndex].url,
-                      onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        StoryImage(
+                          imageUrl: widget.story.storyImages[_currentIndex].url,
+                          onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
+                        ),
+                        Positioned.fill(
+                          child: InvisibleNextAndPreviousButtons(
+                            onNext: _onNext,
+                            onPrevious: _onPrevious,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Measurements.pageVerticalPadding.vs,
@@ -113,5 +129,23 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
         _imageIsLoading = false;
       });
     });
+  }
+
+  void _onNext() {
+    if (_currentIndex < widget.story.storyImages.length - 1) {
+      setState(() {
+        _currentIndex++;
+        _imageIsLoading = true;
+      });
+    }
+  }
+
+  void _onPrevious() {
+    if (_currentIndex > 0) {
+      setState(() {
+        _currentIndex--;
+        _imageIsLoading = true;
+      });
+    }
   }
 }

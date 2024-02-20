@@ -12,6 +12,7 @@ class StoryScreen extends StatefulWidget {
 
 class _StoryScreenState extends State<StoryScreen> {
   late StoryEntity _story;
+  bool _initialized = false;
 
   @override
   void initState() {
@@ -20,8 +21,10 @@ class _StoryScreenState extends State<StoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _story = GoRouterState.of(context).extra as StoryEntity;
-
+    if (!_initialized) {
+      _story = GoRouterState.of(context).extra as StoryEntity;
+      _initialized = true;
+    }
     return Scaffold(
       body: StoryScreenBody(story: _story),
     );
