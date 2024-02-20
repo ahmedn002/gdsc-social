@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
+import 'package:gdsc_social/core/extensions/text_styles.dart';
 import 'package:gdsc_social/features/story/domain/entities/story_entity.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/loading_bar.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/story_circle_hero.dart';
@@ -49,13 +50,13 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.story.userName, style: Theme.of(context).textTheme.titleMedium),
+                  Text(widget.story.userName, style: context.textTheme.titleMedium),
                   5.vs,
-                  Text('@${widget.story.userTag}', style: Theme.of(context).textTheme.labelSmall),
+                  Text('@${widget.story.userTag}', style: context.textTheme.labelSmall),
                 ],
               ),
               const Spacer(),
-              Text(widget.story.storyImages[0].timeAgo, style: Theme.of(context).textTheme.labelSmall),
+              Text(widget.story.storyImages[0].timeAgo, style: context.textTheme.labelSmall),
             ],
           ),
         ),

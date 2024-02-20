@@ -21,6 +21,11 @@ class _LoadingBarState extends State<LoadingBar> {
   double _loadingContainerWidth = 0;
   double _maxWidth = 0;
 
+  // If the user goes to a previous story, the onLoadingComplete callback should not be called
+  // We can't use the shouldLoad property to check if the loading has been cancelled because the user may
+  // Navigate back to the same story and the then the old callback would be called in the middle of the new loading
+  bool _loadingHasBeenCancelled = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +35,11 @@ class _LoadingBarState extends State<LoadingBar> {
   @override
   void didUpdateWidget(covariant LoadingBar oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.shouldLoad && !widget.shouldLoad) {
+      _isLoading = false;
+      _loadingContainerWidth = 0;
+      _loadingHasBeenCancelled = true;
+    }
     _shouldLoad = widget.shouldLoad;
   }
 
@@ -92,6 +102,7 @@ class _LoadingBarState extends State<LoadingBar> {
 
   void _scheduleAnimationStop() {
     Future.delayed(_animationDuration, () {
+      if (_loadingHasBeenCancelled) return;
       widget.onLoadingComplete?.call();
       if (mounted) {
         setState(() {
