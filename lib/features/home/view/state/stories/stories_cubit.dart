@@ -1,5 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../story/domain/entities/story_entity.dart';
 import '../../../domain/use cases/get_stories_use_case.dart';

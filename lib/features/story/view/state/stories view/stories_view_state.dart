@@ -1,6 +1,5 @@
 part of 'stories_view_cubit.dart';
 
-@immutable
 abstract class StoriesViewState {}
 
 class StoriesViewInitial extends StoriesViewState {}

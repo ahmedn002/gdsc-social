@@ -16,7 +16,7 @@ class PostCardBottomSection extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           decoration: BoxDecoration(
             color: AppColors.elevation,
             borderRadius: BorderRadius.circular(100),

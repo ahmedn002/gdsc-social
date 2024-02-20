@@ -9,7 +9,7 @@ class UserStoryCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme styles = Theme.of(context).textTheme;
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: 80,
         maxWidth: 80,
       ),
