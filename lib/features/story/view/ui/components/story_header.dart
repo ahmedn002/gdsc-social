@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gdsc_social/core/constants/assets.dart';
-import 'package:gdsc_social/core/constants/colors.dart';
-import 'package:gdsc_social/core/constants/measurements.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
 import 'package:gdsc_social/features/story/domain/entities/story_entity.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/loading_bar.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/story_circle_hero.dart';
-import 'package:gdsc_social/features/widgets/input/text_input.dart';
 
 class StoryHeaderSection extends StatefulWidget {
   final StoryEntity story;
   final int currentIndex;
-  const StoryHeaderSection({super.key, required this.story, required this.currentIndex});
+  final bool shouldLoadViewTime;
+  final void Function(int completedIndex, bool isLastIndex)? onLoadingComplete;
+  const StoryHeaderSection({super.key, required this.story, required this.currentIndex, required this.shouldLoadViewTime, this.onLoadingComplete});
 
   @override
   State<StoryHeaderSection> createState() => _StoryHeaderSectionState();
 }
 
 class _StoryHeaderSectionState extends State<StoryHeaderSection> {
-  final TextEditingController _textEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
@@ -31,7 +27,12 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
               Expanded(
                 child: LoadingBar(
                   fillProgress: widget.story.storyImages.indexOf(image) < widget.currentIndex,
-                  shouldLoad: widget.story.storyImages.indexOf(image) == widget.currentIndex,
+                  shouldLoad: widget.story.storyImages.indexOf(image) == widget.currentIndex && widget.shouldLoadViewTime,
+                  onLoadingComplete: () {
+                    final int completedIndex = widget.story.storyImages.indexOf(image);
+                    final bool isLastIndex = completedIndex == widget.story.storyImages.length - 1;
+                    widget.onLoadingComplete?.call(completedIndex, isLastIndex);
+                  },
                 ),
               ),
               if (image != widget.story.storyImages.last) 5.hs,
@@ -58,28 +59,6 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
             ],
           ),
         ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Measurements.pageHorizontalPadding),
-          child: TextInput(
-            controller: _textEditingController,
-            hintText: 'Message @${widget.story.userTag}',
-            suffixIcon: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(AssetData.paperClipSvg, height: 20),
-                10.hs,
-                CircleAvatar(
-                  radius: 18,
-                  backgroundColor: AppColors.darkerAccent,
-                  child: SvgPicture.asset(AssetData.paperPlaneSvg, height: 15),
-                ),
-                10.hs,
-              ],
-            ),
-          ),
-        ),
-        Measurements.pageVerticalPadding.vs,
       ],
     );
   }

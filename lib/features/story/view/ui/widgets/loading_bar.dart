@@ -28,6 +28,12 @@ class _LoadingBarState extends State<LoadingBar> {
   }
 
   @override
+  void didUpdateWidget(covariant LoadingBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _shouldLoad = widget.shouldLoad;
+  }
+
+  @override
   Widget build(BuildContext context) {
     // The container should be fully loaded if fillProgress is true (for stories already passed)
     if (widget.fillProgress) {
@@ -51,7 +57,7 @@ class _LoadingBarState extends State<LoadingBar> {
                   alignment: Alignment.centerLeft,
                   child: AnimatedContainer(
                     width: _loadingContainerWidth,
-                    duration: const Duration(seconds: 2),
+                    duration: _animationDuration,
                     curve: Curves.linear,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.vertical(bottom: Radius.circular(50)),

@@ -12,7 +12,7 @@ class LinkComponent extends BodyComponent {
   @override
   String getDisplayText() {
     // We want to return the name of the domain;
-    // e.g. "https://www.google.com" -> "Google Link"
+    // e.g. "https://www.google.com" -> "Google.com Link"
     final RegExp regExp = RegExp(r'^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)');
     final domain = regExp.firstMatch(rawText)?.group(1);
     return domain ?? rawText;
