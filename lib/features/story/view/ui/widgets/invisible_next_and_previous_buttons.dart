@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-class InvisibleNextAndPreviousButtons extends StatelessWidget {
-  final void Function()? onNext;
+class InvisibleGestureDetectors extends StatelessWidget {
   final void Function()? onPrevious;
-  const InvisibleNextAndPreviousButtons({super.key, this.onNext, this.onPrevious});
+
+  final void Function()? onHoldDown;
+  final void Function()? onRelease;
+  final void Function()? onNext;
+  const InvisibleGestureDetectors({super.key, this.onPrevious, this.onHoldDown, this.onRelease, this.onNext});
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +15,41 @@ class InvisibleNextAndPreviousButtons extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: onPrevious,
+            onTapDown: (details) {
+              onHoldDown?.call();
+            },
+            onTapUp: (details) {
+              onRelease?.call();
+            },
             child: Container(
               color: Colors.transparent,
               child: const SizedBox.expand(),
             ),
           ),
         ),
-        const Spacer(),
+        Expanded(
+          child: GestureDetector(
+            onTapDown: (details) {
+              onHoldDown?.call();
+            },
+            onTapUp: (details) {
+              onRelease?.call();
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: const SizedBox.expand(),
+            ),
+          ),
+        ),
         Expanded(
           child: GestureDetector(
             onTap: onNext,
+            onTapDown: (details) {
+              onHoldDown?.call();
+            },
+            onTapUp: (details) {
+              onRelease?.call();
+            },
             child: Container(
               color: Colors.transparent,
               child: const SizedBox.expand(),

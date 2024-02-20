@@ -90,7 +90,7 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                           onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
                         ),
                         Positioned.fill(
-                          child: InvisibleNextAndPreviousButtons(
+                          child: InvisibleGestureDetectors(
                             onNext: _onNext,
                             onPrevious: _onPrevious,
                           ),
