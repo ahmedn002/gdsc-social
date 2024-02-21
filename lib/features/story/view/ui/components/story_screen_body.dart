@@ -10,7 +10,6 @@ import 'package:gdsc_social/features/story/view/ui/widgets/story_image.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import '../../../../../core/constants/measurements.dart';
-import '../widgets/background_gradient.dart';
 
 class StoryScreenBody extends StatefulWidget {
   final StoryEntity story;
@@ -60,10 +59,10 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
           ),
           child: Stack(
             children: [
-              if (_paletteGenerator != null)
-                Positioned.fill(
-                  child: BackgroundGradient(paletteGenerator: _paletteGenerator),
-                ),
+              // if (_paletteGenerator != null)
+              //   Positioned.fill(
+              //     child: BackgroundGradient(paletteGenerator: _paletteGenerator),
+              //   ),
               Column(
                 children: [
                   StoryHeaderSection(

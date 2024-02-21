@@ -11,8 +11,9 @@ class StoryQuickReplyButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.elevation,
+        color: AppColors.darkerBackground,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.elevation, width: 2),
       ),
       child: FittedBox(child: Text(text)),
     );

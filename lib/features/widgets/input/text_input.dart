@@ -6,6 +6,8 @@ class TextInput extends StatelessWidget {
   final String hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final Color borderColor;
+  final Color? fillColor;
 
   const TextInput({
     super.key,
@@ -13,6 +15,8 @@ class TextInput extends StatelessWidget {
     required this.hintText,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor = AppColors.primaryText,
+    this.fillColor,
   });
 
   @override
@@ -21,6 +25,8 @@ class TextInput extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        fillColor: fillColor,
+        filled: fillColor != null,
         hintText: hintText,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -34,8 +40,8 @@ class TextInput extends StatelessWidget {
   InputBorder _getInputBorder(BuildContext context) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(50),
-      borderSide: const BorderSide(
-        color: AppColors.primaryText,
+      borderSide: BorderSide(
+        color: borderColor,
         width: 2,
       ),
     );

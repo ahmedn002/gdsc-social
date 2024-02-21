@@ -39,6 +39,8 @@ class StoryBottomSection extends StatelessWidget {
           TextInput(
             controller: controller,
             hintText: 'Message @$userTag',
+            borderColor: AppColors.elevation,
+            fillColor: AppColors.darkerBackground,
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
