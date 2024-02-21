@@ -5,7 +5,7 @@ import 'package:gdsc_social/features/story/domain/entities/story_entity.dart';
 import 'package:go_router/go_router.dart';
 
 import '../state/stories view/stories_view_cubit.dart';
-import 'components/stories_page_view.dart';
+import 'widgets/stories_page_view.dart';
 
 class StoryScreen extends StatefulWidget {
   const StoryScreen({super.key});

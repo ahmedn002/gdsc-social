@@ -13,7 +13,8 @@ import '../../../../../core/constants/measurements.dart';
 
 class StoryScreenBody extends StatefulWidget {
   final StoryEntity story;
-  const StoryScreenBody({super.key, required this.story});
+  final void Function(StoryEntity)? onStoryComplete;
+  const StoryScreenBody({super.key, required this.story, this.onStoryComplete});
 
   @override
   State<StoryScreenBody> createState() => _StoryScreenBodyState();
@@ -71,7 +72,7 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                     shouldLoadViewTime: !_imageIsLoading && !_userIsPausing,
                     onLoadingComplete: (int completedIndex, bool isLastIndex) {
                       if (isLastIndex) {
-                        Navigator.of(context).pop();
+                        widget.onStoryComplete?.call(widget.story);
                         return;
                       }
                       setState(() {
