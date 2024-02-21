@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InvisibleGestureDetectors extends StatelessWidget {
+class InvisibleGestureDetectors extends StatefulWidget {
   final void Function()? onPrevious;
 
   final void Function()? onHoldDown;
@@ -9,17 +9,38 @@ class InvisibleGestureDetectors extends StatelessWidget {
   const InvisibleGestureDetectors({super.key, this.onPrevious, this.onHoldDown, this.onRelease, this.onNext});
 
   @override
+  State<InvisibleGestureDetectors> createState() => _InvisibleGestureDetectorsState();
+}
+
+class _InvisibleGestureDetectorsState extends State<InvisibleGestureDetectors> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: onPrevious,
+            onTap: widget.onPrevious,
             onTapDown: (details) {
-              onHoldDown?.call();
+              widget.onHoldDown?.call();
             },
             onTapUp: (details) {
-              onRelease?.call();
+              widget.onRelease?.call();
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: const SizedBox.expand(),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: GestureDetector(
+            onTap: widget.onNext,
+            onTapDown: (details) {
+              widget.onHoldDown?.call();
+            },
+            onTapUp: (details) {
+              widget.onRelease?.call();
             },
             child: Container(
               color: Colors.transparent,
@@ -29,26 +50,12 @@ class InvisibleGestureDetectors extends StatelessWidget {
         ),
         Expanded(
           child: GestureDetector(
+            onTap: widget.onNext,
             onTapDown: (details) {
-              onHoldDown?.call();
+              widget.onHoldDown?.call();
             },
             onTapUp: (details) {
-              onRelease?.call();
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: const SizedBox.expand(),
-            ),
-          ),
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: onNext,
-            onTapDown: (details) {
-              onHoldDown?.call();
-            },
-            onTapUp: (details) {
-              onRelease?.call();
+              widget.onRelease?.call();
             },
             child: Container(
               color: Colors.transparent,

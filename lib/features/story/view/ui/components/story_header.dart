@@ -28,7 +28,8 @@ class _StoryHeaderSectionState extends State<StoryHeaderSection> {
               Expanded(
                 child: LoadingBar(
                   fillProgress: widget.story.storyImages.indexOf(image) < widget.currentIndex,
-                  shouldLoad: widget.story.storyImages.indexOf(image) == widget.currentIndex && widget.shouldLoadViewTime,
+                  shouldLoad: widget.story.storyImages.indexOf(image) == widget.currentIndex,
+                  shouldPause: !widget.shouldLoadViewTime,
                   onLoadingComplete: () {
                     final int completedIndex = widget.story.storyImages.indexOf(image);
                     final bool isLastIndex = completedIndex == widget.story.storyImages.length - 1;

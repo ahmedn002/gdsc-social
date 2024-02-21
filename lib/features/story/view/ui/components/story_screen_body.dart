@@ -24,6 +24,7 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
   PaletteGenerator? _paletteGenerator;
   int _currentIndex = 0;
   bool _imageIsLoading = true;
+  bool _userIsPausing = false;
   late List<ImageProvider> _imageProviders;
   final TextEditingController _messageController = TextEditingController();
 
@@ -68,7 +69,7 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                   StoryHeaderSection(
                     story: widget.story,
                     currentIndex: _currentIndex,
-                    shouldLoadViewTime: !_imageIsLoading,
+                    shouldLoadViewTime: !_imageIsLoading && !_userIsPausing,
                     onLoadingComplete: (int completedIndex, bool isLastIndex) {
                       if (isLastIndex) {
                         Navigator.of(context).pop();
@@ -82,17 +83,27 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                   ),
                   Measurements.pageVerticalPadding.vs,
                   Expanded(
-                    child: Stack(
-                      alignment: Alignment.center,
+                    child: Row(
                       children: [
-                        StoryImage(
-                          imageUrl: widget.story.storyImages[_currentIndex].url,
-                          onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
-                        ),
-                        Positioned.fill(
-                          child: InvisibleGestureDetectors(
-                            onNext: _onNext,
-                            onPrevious: _onPrevious,
+                        Expanded(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned.fill(
+                                child: StoryImage(
+                                  imageUrl: widget.story.storyImages[_currentIndex].url,
+                                  onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
+                                ),
+                              ),
+                              Positioned.fill(
+                                child: InvisibleGestureDetectors(
+                                  onNext: _onNext,
+                                  onPrevious: _onPrevious,
+                                  onHoldDown: _onHoldDown,
+                                  onRelease: _onRelease,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -147,5 +158,17 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
         _imageIsLoading = true;
       });
     }
+  }
+
+  void _onHoldDown() {
+    setState(() {
+      _userIsPausing = true;
+    });
+  }
+
+  void _onRelease() {
+    setState(() {
+      _userIsPausing = false;
+    });
   }
 }

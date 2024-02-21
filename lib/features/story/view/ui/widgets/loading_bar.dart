@@ -5,10 +5,11 @@ import '../../../../../core/constants/colors.dart';
 
 class LoadingBar extends StatefulWidget {
   final bool shouldLoad;
+  final bool shouldPause;
   final void Function()? onLoadingStart;
   final void Function()? onLoadingComplete;
   final bool fillProgress;
-  const LoadingBar({super.key, this.shouldLoad = false, this.onLoadingStart, this.onLoadingComplete, this.fillProgress = false});
+  const LoadingBar({super.key, this.shouldLoad = false, this.shouldPause = false, this.onLoadingStart, this.onLoadingComplete, this.fillProgress = false});
 
   @override
   State<LoadingBar> createState() => _LoadingBarState();
@@ -36,10 +37,17 @@ class _LoadingBarState extends State<LoadingBar> with SingleTickerProviderStateM
   @override
   void didUpdateWidget(covariant LoadingBar oldWidget) {
     super.didUpdateWidget(oldWidget);
+    debugPrint('LoadingBar didUpdateWidget: shouldPause: ${widget.shouldPause}, oldWidget.shouldPause: ${oldWidget.shouldPause}');
     if (oldWidget.shouldLoad && !widget.shouldLoad) {
       _isLoading = false;
       _loadingHasBeenCancelled = true;
       _controller.reset();
+    }
+    if (widget.shouldPause && _controller.isAnimating) {
+      _controller.stop();
+    }
+    if (oldWidget.shouldPause && !widget.shouldPause && _shouldLoad) {
+      _controller.forward();
     }
     _shouldLoad = widget.shouldLoad;
   }
