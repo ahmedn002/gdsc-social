@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
 import 'package:gdsc_social/features/story/domain/entities/story_entity.dart';
-import 'package:gdsc_social/features/story/view/ui/components/story_screen_body.dart';
 import 'package:go_router/go_router.dart';
+
+import '../state/stories view/stories_view_cubit.dart';
+import 'components/stories_page_view.dart';
 
 class StoryScreen extends StatefulWidget {
   const StoryScreen({super.key});
@@ -26,7 +30,17 @@ class _StoryScreenState extends State<StoryScreen> {
       _initialized = true;
     }
     return Scaffold(
-      body: StoryScreenBody(story: _story),
+      body: BlocBuilder<StoriesCubit, StoriesState>(
+        builder: (context, state) {
+          if (state is StoriesSuccess) {
+            context.read<StoriesViewCubit>().initializeStories(state.stories, _story);
+            return StoriesPageView(stories: state.stories, initialStory: _story);
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }

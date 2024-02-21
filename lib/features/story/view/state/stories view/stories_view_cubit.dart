@@ -8,10 +8,11 @@ class StoriesViewCubit extends Cubit<StoriesViewState> {
   late Map<String, int> _storiesIndices;
   StoriesViewCubit() : super(StoriesViewInitial());
 
-  void initializeStories(List<StoryEntity> stories) {
+  void initializeStories(List<StoryEntity> stories, StoryEntity initialStory) {
     _storiesIndices = {
       for (var story in stories) story.storyId: 0,
     };
+    emit(StoriesViewIndexChange(initialStory.storyId, 0));
   }
 
   void updateStoryIndex(String storyId, int index) {
