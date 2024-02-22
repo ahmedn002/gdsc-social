@@ -13,8 +13,10 @@ import '../../../../../core/constants/measurements.dart';
 
 class StoryScreenBody extends StatefulWidget {
   final StoryEntity story;
-  final void Function(StoryEntity)? onStoryComplete;
-  const StoryScreenBody({super.key, required this.story, this.onStoryComplete});
+  final void Function()? onStoryComplete;
+  final void Function()? onPreviousStory;
+  final bool isLastStory;
+  const StoryScreenBody({super.key, required this.story, this.onStoryComplete, this.onPreviousStory, this.isLastStory = false});
 
   @override
   State<StoryScreenBody> createState() => _StoryScreenBodyState();
@@ -72,7 +74,7 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
                     shouldLoadViewTime: !_imageIsLoading && !_userIsPausing,
                     onLoadingComplete: (int completedIndex, bool isLastIndex) {
                       if (isLastIndex) {
-                        widget.onStoryComplete?.call(widget.story);
+                        widget.onStoryComplete?.call();
                         return;
                       }
                       setState(() {
@@ -148,6 +150,8 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
         _currentIndex++;
         _imageIsLoading = true;
       });
+    } else if (_currentIndex == widget.story.storyImages.length - 1) {
+      widget.onStoryComplete?.call();
     }
   }
 
@@ -157,6 +161,8 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
         _currentIndex--;
         _imageIsLoading = true;
       });
+    } else if (_currentIndex == 0) {
+      widget.onPreviousStory?.call();
     }
   }
 
