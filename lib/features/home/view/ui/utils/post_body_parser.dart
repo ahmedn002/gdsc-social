@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:gdsc_social/core/extensions/insert_between_each_element.dart';
 import 'package:gdsc_social/features/home/view/ui/utils/parsed_body.dart';
 import 'package:gdsc_social/features/home/view/ui/utils/post%20body/body_component.dart';
 import 'package:gdsc_social/features/home/view/ui/utils/post%20body/hashtag_component.dart';
@@ -6,40 +8,56 @@ import 'package:gdsc_social/features/home/view/ui/utils/post%20body/mention_comp
 import 'package:gdsc_social/features/home/view/ui/utils/post%20body/text_component.dart';
 
 class PostBodyParser {
-  static ParsedBody parse(String body) {
+  final String body;
+
+  const PostBodyParser(this.body);
+
+  ParsedBody parse() {
     // The text body may contain a combination of 4 things:
     // 1. Normal text "Lorem ipsum"
     // 2. Links "https://www.google.com"
     // 3. Hashtags "#flutter"
     // 4. Mentions "@flutter"
 
-    // Check and parse each of these cases and return an object that contains the parsed text and the type of the parsed text.
+    // We need to preserve whitespace and new lines, so we can't just split by spaces.
 
-    // Step 1: Tokenize the body by splitting it by spaces.
-    final List<String> tokens = _tokenize(body);
+    // Step 1: Tokenize the body by splitting it by lines (\n) and subsequently by spaces.
+    final List<List<String>> tokenLines = _tokenize(body);
 
-    // Step 2: Create RegExp patterns for links, hashtags, and mentions.
-    final List<BodyComponent> components = _parseTokens(tokens);
+    // Step 2: Parse the lines to get a list of the overall components.
+    final List<BodyComponent> components = _parseLines(tokenLines);
 
-    // Step 3: Merge consecutive text components.
-    final List<BodyComponent> mergedComponents = _mergeTextComponents(components);
-
-    // Step 4: Add spaces between components.
-    final List<BodyComponent> componentsWithSpaces = _addSpacesBetweenComponents(mergedComponents);
-
-    // Step 5: Re-merge consecutive text components. (TODO: Optimize this step by single-pass merging.)
-    final List<BodyComponent> finalComponents = _mergeTextComponents(componentsWithSpaces);
+    // Step 3: Since we parsed each line separately, and each line was split by spaces
+    // We have a lot of TextComponents that are separated by space TextComponents, so we merge them.
+    final List<BodyComponent> finalComponents = _mergeTextComponents(components);
 
     return ParsedBody(components: finalComponents);
   }
 
-  static List<String> _tokenize(String body) {
-    // TODO: Handle tokenizing \n and \t.
-    return body.split(' ');
+  List<List<String>> _tokenize(String body) {
+    final List<String> lines = body.split('\n');
+    return [
+      for (String line in lines) line.split(' '),
+    ];
   }
 
-  static List<BodyComponent> _parseTokens(List<String> tokens) {
-    final RegExp linkRegExp = RegExp(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+');
+  Iterable<BodyComponent> _parseLine(List<String> tokens) {
+    final List<BodyComponent> lineComponents = _parseTokens(tokens);
+    // Return parsed tokens with a white space TextComponent between each token
+    return lineComponents.insertBetweenEachElement(const TextComponent(rawText: ' '));
+  }
+
+  List<BodyComponent> _parseLines(List<List<String>> tokenLines) {
+    final List<Iterable<BodyComponent>> components = []; // Outer list to be able to add (Iterables immutable)
+    for (List<String> tokenLine in tokenLines) {
+      components.add(_parseLine(tokenLine));
+    }
+    final Iterable<Iterable<BodyComponent>> newLineSeparatedComponents = components.insertBetweenEachElement([const TextComponent(rawText: '\n')]);
+    return newLineSeparatedComponents.flattened.toList();
+  }
+
+  List<BodyComponent> _parseTokens(List<String> tokens) {
+    final RegExp linkRegExp = RegExp(r'https?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*(),]|%[0-9a-fA-F][0-9a-fA-F])+');
     final RegExp hashtagRegExp = RegExp(r'^#\w+');
     final RegExp mentionRegExp = RegExp(r'^@\w+');
 
@@ -72,20 +90,9 @@ class PostBodyParser {
           break;
         }
       }
-      mergedComponents.add(TextComponent(rawText: textTokens.join(' ')));
+      mergedComponents.add(TextComponent(rawText: textTokens.join('')));
       i += textTokens.length - 1;
     }
     return mergedComponents;
-  }
-
-  static List<BodyComponent> _addSpacesBetweenComponents(List<BodyComponent> components) {
-    final List<BodyComponent> componentsWithSpaces = [];
-    for (int i = 0; i < components.length; i++) {
-      componentsWithSpaces.add(components[i]);
-      if (i + 1 < components.length) {
-        componentsWithSpaces.add(const TextComponent(rawText: ' '));
-      }
-    }
-    return componentsWithSpaces;
   }
 }

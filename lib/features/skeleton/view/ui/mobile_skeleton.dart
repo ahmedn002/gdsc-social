@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
+import 'package:gdsc_social/features/skeleton/view/ui/widgets/app_bar.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/measurements.dart';
-import '../main_scaffold.dart';
+import '../../../widgets/screen/main_scaffold.dart';
 
-class MainSliverScaffold extends StatelessWidget {
-  final Widget persistentHeader;
+class MobileSkeleton extends StatelessWidget {
   final Widget upperBody;
   final Widget lowerBody;
   final bool enableUpperBodyPadding;
   final bool enableLowerBodyPadding;
-  const MainSliverScaffold({
+  const MobileSkeleton({
     super.key,
-    required this.persistentHeader,
     required this.upperBody,
     required this.lowerBody,
     this.enableUpperBodyPadding = true,
@@ -28,7 +27,10 @@ class MainSliverScaffold extends StatelessWidget {
         slivers: [
           SliverPersistentHeader(
             delegate: PersistentHeader(
-              widget: persistentHeader,
+              widget: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: Measurements.pageHorizontalPadding),
+                child: MainAppBar(),
+              ),
             ),
             pinned: true,
           ),

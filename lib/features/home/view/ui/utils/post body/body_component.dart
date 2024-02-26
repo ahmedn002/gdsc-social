@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_social/core/extensions/text_styles.dart';
 
 abstract class BodyComponent {
   final String rawText;
-  const BodyComponent(this.rawText);
+  const BodyComponent({required this.rawText});
 
-  String getDisplayText();
+  String get displayText => rawText;
+
   InlineSpan getDisplaySpan(BuildContext context) {
     return TextSpan(
-      text: getDisplayText(),
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+      text: displayText,
+      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
     );
   }
 }

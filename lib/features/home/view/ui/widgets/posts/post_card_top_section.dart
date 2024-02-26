@@ -27,7 +27,7 @@ class PostCardTopSection extends StatelessWidget {
               const DashedLine(),
               (Measurements.postAvatarRadius + 8).hs,
               Expanded(
-                child: PostCardBodySection(body: PostBodyParser.parse(post.body)),
+                child: PostCardBodySection(body: PostBodyParser(post.body).parse()),
               ),
             ],
           ),

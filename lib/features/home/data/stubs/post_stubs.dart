@@ -8,7 +8,7 @@ final List<PostEntity> postStubs = [
     userImageUrl: StubUtils.getRandomAvatar(),
     username: 'John Doe',
     userTag: 'johndoe',
-    body: 'Check out my newest Flutter app that I developed alongside @JannaDoe13 on https://www.github.com \n\n - #Flutter #AppDevelopment',
+    body: 'Check out my newest Flutter app that I developed alongside @JannaDoe13 on https://www.github.com \n\n- #Flutter #AppDevelopment',
     imageUrl: 'https://i.pravatar.cc/150?img=2',
     likes: 10,
     comments: 5,

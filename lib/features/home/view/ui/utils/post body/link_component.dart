@@ -1,32 +1,32 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gdsc_social/core/extensions/capitalize.dart';
+import 'package:gdsc_social/core/extensions/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../core/constants/colors.dart';
 import 'body_component.dart';
 
 class LinkComponent extends BodyComponent {
-  LinkComponent({required String rawText}) : super(rawText);
+  LinkComponent({required super.rawText});
 
   @override
-  String getDisplayText() {
+  String get displayText {
     // We want to return the name of the domain;
-    // e.g. "https://www.google.com" -> "Google.com Link"
-    final RegExp regExp = RegExp(r'^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)');
-    final domain = regExp.firstMatch(rawText)?.group(1);
-    return domain ?? rawText;
+    // e.g. "https://www.google.com" -> "google.com link"
+    final RegExp regExp = RegExp(r'^(?:https?://)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?]+)');
+    final String? domain = regExp.firstMatch(rawText)?.group(1);
+    return domain != null ? '$domain link' : rawText;
   }
 
   @override
   InlineSpan getDisplaySpan(BuildContext context) {
     return TextSpan(
-      text: '${getDisplayText().capitalize} Link',
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w900,
-            color: AppColors.accent,
-            decoration: TextDecoration.underline,
-          ),
+      text: displayText,
+      style: context.textTheme.bodyMedium?.copyWith(
+        fontWeight: FontWeight.w900,
+        color: AppColors.accent,
+        decoration: TextDecoration.underline,
+      ),
       recognizer: TapGestureRecognizer()..onTap = () => _launchUrl(rawText),
     );
   }
