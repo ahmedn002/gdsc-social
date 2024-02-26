@@ -4,10 +4,14 @@ import 'package:gdsc_social/core/constants/assets.dart';
 import 'package:gdsc_social/core/constants/colors.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+  final bool shrink;
+  const Logo({super.key, this.shrink = false});
 
   @override
   Widget build(BuildContext context) {
+    if (shrink) {
+      return SvgPicture.asset(AssetData.logoSvg);
+    }
     return Row(
       children: [
         SvgPicture.asset(AssetData.logoSvg),

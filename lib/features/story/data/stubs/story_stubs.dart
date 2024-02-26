@@ -91,5 +91,51 @@ final List<StoryModel> storyStubs = [
         createdAt: DateTime.now().subtract(32.minutes),
       ),
     ],
-  )
+  ),
+  StoryModel(
+    id: '5',
+    tag: 'JohnathanDoe',
+    userName: 'Johnathan Doe',
+    userImage: StubUtils.getRandomAvatar(id: 4),
+    images: [
+      StoryImageModel(
+        id: '12',
+        imageUrl: 'https://picsum.photos/1000/1500?random=12',
+        createdAt: DateTime.now().subtract(31.minutes),
+      ),
+      StoryImageModel(
+        id: '13',
+        imageUrl: 'https://picsum.photos/1000/1500?random=13',
+        createdAt: DateTime.now().subtract(30.minutes),
+      ),
+      StoryImageModel(
+        id: '14',
+        imageUrl: 'https://picsum.photos/1000/1500?random=14',
+        createdAt: DateTime.now().subtract(29.minutes),
+      ),
+    ],
+  ),
+  StoryModel(
+    id: '6',
+    tag: 'JaneDoe',
+    userName: 'Jane Doe',
+    userImage: StubUtils.getRandomAvatar(id: 5),
+    images: [
+      StoryImageModel(
+        id: '15',
+        imageUrl: 'https://picsum.photos/1000/1500?random=15',
+        createdAt: DateTime.now().subtract(28.minutes),
+      ),
+      StoryImageModel(
+        id: '16',
+        imageUrl: 'https://picsum.photos/1000/1500?random=16',
+        createdAt: DateTime.now().subtract(27.minutes),
+      ),
+      StoryImageModel(
+        id: '17',
+        imageUrl: 'https://picsum.photos/1000/1500?random=17',
+        createdAt: DateTime.now().subtract(26.minutes),
+      ),
+    ],
+  ),
 ];

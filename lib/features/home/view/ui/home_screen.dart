@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_social/core/constants/measurements.dart';
 import 'package:gdsc_social/features/home/view/ui/components/posts_section_bloc_builder.dart';
 import 'package:gdsc_social/features/home/view/ui/components/stories_section_bloc_builder.dart';
-import 'package:gdsc_social/features/skeleton/view/ui/mobile_skeleton.dart';
+import 'package:gdsc_social/features/skeleton/view/ui/components/adaptive_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MobileSkeleton(
+    return AdaptiveScreen.fromUpperAndLowerSection(
       enableUpperBodyPadding: false,
-      upperBody: Padding(
+      enableLowerBodyPadding: true,
+      upperBody: const Padding(
         padding: EdgeInsets.only(
           top: Measurements.pageVerticalPadding,
         ),
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      lowerBody: PostsSectionBlocBuilder(),
+      lowerBody: const PostsSectionBlocBuilder(),
     );
   }
 }
