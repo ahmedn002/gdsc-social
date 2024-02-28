@@ -5,7 +5,9 @@ import 'package:gdsc_social/core/routes/route_manager.dart';
 import 'package:gdsc_social/core/utils/bloc_observer.dart';
 import 'package:gdsc_social/core/utils/general.dart';
 import 'package:gdsc_social/core/utils/locator.dart';
+import 'package:gdsc_social/features/home/domain/use%20cases/get_popular_hashtags_use_case.dart';
 import 'package:gdsc_social/features/home/domain/use%20cases/get_posts_use_case.dart';
+import 'package:gdsc_social/features/home/view/state/hashtags/hashtags_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/posts/posts_cubit.dart';
 import 'package:gdsc_social/features/home/view/state/stories/stories_cubit.dart';
 import 'package:gdsc_social/features/story/view/state/stories%20view/stories_view_cubit.dart';
@@ -63,6 +65,11 @@ class App extends StatelessWidget {
           BlocProvider<PostsCubit>(
             create: (context) => PostsCubit(
               GetPostsUseCase(Locator.get<HomeRepositoryImplementation>()),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => HashtagsCubit(
+              GetPopularHashtagsUseCase(Locator.get<HomeRepositoryImplementation>()),
             ),
           ),
           BlocProvider<StoriesViewCubit>(

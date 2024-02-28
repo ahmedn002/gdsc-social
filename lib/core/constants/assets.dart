@@ -10,4 +10,7 @@ class AssetData {
   static const String saveSvg = 'assets/save.svg';
   static const String paperClipSvg = 'assets/paperclip.svg';
   static const String paperPlaneSvg = 'assets/paperplane.svg';
+  static const String homeSvg = 'assets/home.svg';
+  static const String profileSvg = 'assets/profile.svg';
+  static const String settingsSvg = 'assets/settings.svg';
 }

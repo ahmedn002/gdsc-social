@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gdsc_social/core/constants/colors.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
 import 'package:gdsc_social/core/extensions/text_styles.dart';
-import 'package:gdsc_social/core/utils/stub.dart';
 import 'package:gdsc_social/features/widgets/misc/custom_circle_avatar.dart';
 
 class UserProfile extends StatelessWidget {
@@ -14,26 +14,33 @@ class UserProfile extends StatelessWidget {
     if (shrink) {
       return const CustomCircleAvatar(imageUrl: 'https://avatar.iran.liara.run/public/boy?username=Ahmed');
     }
-    return Row(
-      children: [
-        CustomCircleAvatar(imageUrl: StubUtils.getRandomAvatar(id: 1)),
-        10.hs,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'User Name',
-                style: context.textTheme.titleSmall,
-              ),
-              Text(
-                'email@gmail.com',
-                style: context.textTheme.labelSmall,
-              ),
-            ],
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: AppColors.elevation,
+      ),
+      child: Row(
+        children: [
+          const CustomCircleAvatar(imageUrl: 'https://avatar.iran.liara.run/public/boy?username=Ahmed'),
+          10.hs,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'User Name',
+                  style: context.textTheme.titleSmall,
+                ),
+                Text(
+                  'email@gmail.com',
+                  style: context.textTheme.labelSmall,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gdsc_social/features/skeleton/view/ui/desktop_skeleton.dart';
 import 'package:gdsc_social/features/skeleton/view/ui/mobile_skeleton.dart';
 
 import '../tablet_skeleton.dart';
@@ -11,11 +12,13 @@ class AdaptiveScreen extends StatelessWidget {
 
   const AdaptiveScreen({super.key, required this.mobileBuilder, required this.tabletBuilder, required this.desktopBuilder});
 
-  factory AdaptiveScreen.fromUpperAndLowerSection({
+  factory AdaptiveScreen.fromUpperLowerSideSections({
     required final Widget upperBody,
     required final Widget lowerBody,
+    final Widget? rightSideBar,
     required final bool enableUpperBodyPadding,
     required final bool enableLowerBodyPadding,
+    required final bool enableRightSideBarPadding,
   }) {
     return AdaptiveScreen(
       mobileBuilder: (context) => MobileSkeleton(
@@ -30,11 +33,13 @@ class AdaptiveScreen extends StatelessWidget {
         upperBody: upperBody,
         lowerBody: lowerBody,
       ),
-      desktopBuilder: (context) => TabletSkeleton(
+      desktopBuilder: (context) => DesktopSkeleton(
         enableUpperBodyPadding: enableUpperBodyPadding,
         enableLowerBodyPadding: enableLowerBodyPadding,
+        enableRightSideBarPadding: enableRightSideBarPadding,
         upperBody: upperBody,
         lowerBody: lowerBody,
+        rightSideBar: rightSideBar,
       ),
     );
   }

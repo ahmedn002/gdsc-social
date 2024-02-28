@@ -26,9 +26,20 @@ class SideBarItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: EdgeInsets.symmetric(
+          vertical: shrink ? 3 : 10,
+          horizontal: shrink ? 3 : 10,
+        ),
         child: shrink ? _buildShrunkChild() : _buildExpandedChild(context),
       ),
+    );
+  }
+
+  Widget _icon() {
+    return SizedBox(
+      width: 20,
+      height: 20,
+      child: icon,
     );
   }
 
@@ -36,7 +47,7 @@ class SideBarItem extends StatelessWidget {
     return CircleAvatar(
       radius: 20,
       backgroundColor: isSelected ? AppColors.darkerAccent : Colors.transparent,
-      child: icon,
+      child: _icon(),
     );
   }
 
@@ -44,11 +55,16 @@ class SideBarItem extends StatelessWidget {
     return IntrinsicHeight(
       child: Row(
         children: [
-          icon,
+          ColorFiltered(
+            colorFilter: isSelected ? const ColorFilter.mode(AppColors.accent, BlendMode.srcIn) : const ColorFilter.mode(AppColors.primaryText, BlendMode.srcIn),
+            child: _icon(),
+          ),
           const SizedBox(width: 16),
           Text(
             label,
-            style: context.textTheme.labelMedium?.copyWith(color: AppColors.secondaryText),
+            style: context.textTheme.labelMedium?.copyWith(
+              color: isSelected ? AppColors.accent : AppColors.primaryText,
+            ),
           ),
           const Spacer(),
           if (isSelected)

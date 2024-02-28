@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_social/features/skeleton/view/ui/components/side_bar.dart';
+import 'package:gdsc_social/features/skeleton/view/ui/tablet_skeleton.dart';
 
 import '../../../../core/constants/colors.dart';
 import 'components/body_scroll_view.dart';
@@ -22,10 +24,23 @@ class DesktopSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (rightSideBar == null) {
+      return TabletSkeleton(
+        upperBody: upperBody,
+        lowerBody: lowerBody,
+        enableUpperBodyPadding: enableUpperBodyPadding,
+        enableLowerBodyPadding: enableLowerBodyPadding,
+      );
+    }
     return Scaffold(
       body: Row(
         children: [
+          const Expanded(
+            flex: 3,
+            child: SideBar(),
+          ),
           Expanded(
+            flex: 5,
             child: BodyScrollView(
               enableUpperBodyPadding: enableUpperBodyPadding,
               upperBody: upperBody,
@@ -33,6 +48,10 @@ class DesktopSkeleton extends StatelessWidget {
               lowerBody: lowerBody,
               enablePersistentHeader: false,
             ),
+          ),
+          Expanded(
+            flex: 3,
+            child: rightSideBar!,
           ),
         ],
       ),

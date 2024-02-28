@@ -19,6 +19,7 @@ class MobileSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BodyScrollView(
+        enablePersistentHeader: true,
         enableUpperBodyPadding: enableUpperBodyPadding,
         upperBody: upperBody,
         enableLowerBodyPadding: enableLowerBodyPadding,

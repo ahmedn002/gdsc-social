@@ -31,12 +31,15 @@ class SideBar extends StatelessWidget {
         ),
         child: Column(
           children: [
-            30.vs,
             UserProfile(shrink: shrink),
-            30.vs,
+            Divider(
+              color: AppColors.elevation,
+              thickness: 2,
+              height: Measurements.pageVerticalPadding * 2,
+            ),
             SideBarItem(
               label: 'Home',
-              icon: const Icon(Icons.home),
+              icon: SvgPicture.asset(AssetData.homeSvg),
               isSelected: true,
               onTap: () {},
               shrink: shrink,
@@ -65,14 +68,14 @@ class SideBar extends StatelessWidget {
             10.vs,
             SideBarItem(
               label: 'Profile',
-              icon: const Icon(Icons.person),
+              icon: SvgPicture.asset(AssetData.profileSvg),
               onTap: () {},
               shrink: shrink,
             ),
             10.vs,
             SideBarItem(
               label: 'Settings',
-              icon: const Icon(Icons.settings),
+              icon: SvgPicture.asset(AssetData.settingsSvg),
               onTap: () {},
               shrink: shrink,
             ),
