@@ -1,4 +1,4 @@
-# Project Title: ASUFE - Carpool
+# Project Title: GDSC Social
 <img src="screenshots/img_6.png" alt="drawing" width="100%"/>
 
 
@@ -25,8 +25,8 @@ flutter run
 ## App Screenshots
 ### PHONE
 <p align="center">
-  <img src="screenshots/img.png" width="20%" />
-  <img src="screenshots/img_1.png" width="20%" />
+  <img src="screenshots/img.png" width="40%" />
+  <img src="screenshots/img_1.png" width="40%" />
 </p>
 
 ### TABLET
@@ -34,8 +34,8 @@ flutter run
 
 ### DESKTOP
 <p align="center">
-  <img src="screenshots/img_3.png"/>
-  <img src="screenshots/img_4.png" height="786px"/>
+  <img src="screenshots/img_3.png" width="36%"/>
+  <img src="screenshots/img_4.png" width="64%"/>
 </p>
 <div></div>
 <p align="center">
