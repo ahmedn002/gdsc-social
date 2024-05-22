@@ -6,7 +6,8 @@ import 'package:gdsc_social/core/constants/measurements.dart';
 import 'package:gdsc_social/core/extensions/num_to_sized_box.dart';
 import 'package:gdsc_social/features/skeleton/view/ui/widgets/side_bar_item.dart';
 import 'package:gdsc_social/features/skeleton/view/ui/widgets/user_profile.dart';
-import 'package:gdsc_social/features/widgets/misc/logo.dart';
+
+import '../../../../widgets/misc/logo.dart';
 
 class SideBar extends StatelessWidget {
   final bool shrink;
@@ -19,7 +20,6 @@ class SideBar extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: Measurements.pageHorizontalPadding / 2,
-          vertical: Measurements.pageVerticalPadding,
         ),
         decoration: const BoxDecoration(
           border: Border(
@@ -29,58 +29,74 @@ class SideBar extends StatelessWidget {
             ),
           ),
         ),
-        child: Column(
-          children: [
-            UserProfile(shrink: shrink),
-            Divider(
-              color: AppColors.elevation,
-              thickness: 2,
-              height: Measurements.pageVerticalPadding * 2,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Measurements.pageVerticalPadding.vs,
+                  UserProfile(shrink: shrink),
+                  const Divider(
+                    color: AppColors.elevation,
+                    thickness: 2,
+                    height: Measurements.pageVerticalPadding * 2,
+                  ),
+                  SideBarItem(
+                    label: 'Home',
+                    icon: SvgPicture.asset(AssetData.homeSvg),
+                    isSelected: true,
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                  10.vs,
+                  SideBarItem(
+                    label: 'Explore',
+                    icon: SvgPicture.asset(AssetData.searchSvg),
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                  10.vs,
+                  SideBarItem(
+                    label: 'Notifications',
+                    icon: SvgPicture.asset(AssetData.notificationsSvg),
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                  10.vs,
+                  SideBarItem(
+                    label: 'Messages',
+                    icon: SvgPicture.asset(AssetData.chatSvg),
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                  10.vs,
+                  SideBarItem(
+                    label: 'Profile',
+                    icon: SvgPicture.asset(AssetData.profileSvg),
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                  10.vs,
+                  SideBarItem(
+                    label: 'Settings',
+                    icon: SvgPicture.asset(AssetData.settingsSvg),
+                    onTap: () {},
+                    shrink: shrink,
+                  ),
+                ],
+              ),
             ),
-            SideBarItem(
-              label: 'Home',
-              icon: SvgPicture.asset(AssetData.homeSvg),
-              isSelected: true,
-              onTap: () {},
-              shrink: shrink,
+            SliverToBoxAdapter(child: 20.vs),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Logo(shrink: shrink),
+                  Measurements.pageVerticalPadding.vs,
+                ],
+              ),
             ),
-            10.vs,
-            SideBarItem(
-              label: 'Explore',
-              icon: SvgPicture.asset(AssetData.searchSvg),
-              onTap: () {},
-              shrink: shrink,
-            ),
-            10.vs,
-            SideBarItem(
-              label: 'Notifications',
-              icon: SvgPicture.asset(AssetData.notificationsSvg),
-              onTap: () {},
-              shrink: shrink,
-            ),
-            10.vs,
-            SideBarItem(
-              label: 'Messages',
-              icon: SvgPicture.asset(AssetData.chatSvg),
-              onTap: () {},
-              shrink: shrink,
-            ),
-            10.vs,
-            SideBarItem(
-              label: 'Profile',
-              icon: SvgPicture.asset(AssetData.profileSvg),
-              onTap: () {},
-              shrink: shrink,
-            ),
-            10.vs,
-            SideBarItem(
-              label: 'Settings',
-              icon: SvgPicture.asset(AssetData.settingsSvg),
-              onTap: () {},
-              shrink: shrink,
-            ),
-            const Spacer(),
-            Logo(shrink: shrink),
           ],
         ),
       ),

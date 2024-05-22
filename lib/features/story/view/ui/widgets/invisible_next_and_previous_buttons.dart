@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gdsc_social/features/story/view/ui/widgets/story_gesture_detector.dart';
@@ -18,7 +19,7 @@ class _InvisibleGestureDetectorsState extends State<InvisibleGestureDetectors> {
   @override
   Widget build(BuildContext context) {
     return StoryGestureDetector(
-      duration: 100.ms,
+      duration: 400.ms,
       onLongPressStart: (LongPressStartDetails details) {
         widget.onHoldDown?.call();
       },
@@ -29,7 +30,9 @@ class _InvisibleGestureDetectorsState extends State<InvisibleGestureDetectors> {
         children: [
           Expanded(
             child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
               onTap: widget.onPrevious,
+              supportedDevices: const {PointerDeviceKind.mouse, PointerDeviceKind.touch},
               child: Container(
                 color: Colors.transparent,
                 child: const SizedBox.expand(),
@@ -38,6 +41,7 @@ class _InvisibleGestureDetectorsState extends State<InvisibleGestureDetectors> {
           ),
           Expanded(
             child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
               onTap: widget.onNext,
               child: Container(
                 color: Colors.transparent,

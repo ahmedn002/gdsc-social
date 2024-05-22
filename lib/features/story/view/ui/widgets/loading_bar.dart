@@ -37,7 +37,7 @@ class _LoadingBarState extends State<LoadingBar> with SingleTickerProviderStateM
   @override
   void didUpdateWidget(covariant LoadingBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    debugPrint('LoadingBar didUpdateWidget: shouldPause: ${widget.shouldPause}, oldWidget.shouldPause: ${oldWidget.shouldPause}');
+    // debugPrint('LoadingBar didUpdateWidget: shouldPause: ${widget.shouldPause}, oldWidget.shouldPause: ${oldWidget.shouldPause}');
     if (oldWidget.shouldLoad && !widget.shouldLoad) {
       _isLoading = false;
       _loadingHasBeenCancelled = true;

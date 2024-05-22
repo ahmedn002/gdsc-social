@@ -60,66 +60,74 @@ class _StoryScreenBodyState extends State<StoryScreenBody> {
             minHeight: constraints.maxHeight,
             minWidth: constraints.maxWidth,
           ),
-          child: Stack(
-            children: [
-              // if (_paletteGenerator != null)
-              //   Positioned.fill(
-              //     child: BackgroundGradient(paletteGenerator: _paletteGenerator),
-              //   ),
-              Column(
-                children: [
-                  StoryHeaderSection(
-                    story: widget.story,
-                    currentIndex: _currentIndex,
-                    shouldLoadViewTime: !_imageIsLoading && !_userIsPausing,
-                    onLoadingComplete: (int completedIndex, bool isLastIndex) {
-                      if (isLastIndex) {
-                        widget.onStoryComplete?.call();
-                        return;
-                      }
-                      setState(() {
-                        _currentIndex = completedIndex + 1;
-                        _imageIsLoading = true;
-                      });
-                    },
-                  ),
-                  Measurements.pageVerticalPadding.vs,
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Positioned.fill(
-                                child: StoryImage(
-                                  imageUrl: widget.story.storyImages[_currentIndex].url,
-                                  onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
-                                ),
-                              ),
-                              Positioned.fill(
-                                child: InvisibleGestureDetectors(
-                                  onNext: _onNext,
-                                  onPrevious: _onPrevious,
-                                  onHoldDown: _onHoldDown,
-                                  onRelease: _onRelease,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+          child: GestureDetector(
+            onVerticalDragEnd: (details) {
+              // If swipe down, pop
+              if (details.primaryVelocity! > 0) {
+                Navigator.of(context).pop();
+              }
+            },
+            child: Stack(
+              children: [
+                // if (_paletteGenerator != null)
+                //   Positioned.fill(
+                //     child: BackgroundGradient(paletteGenerator: _paletteGenerator),
+                //   ),
+                Column(
+                  children: [
+                    StoryHeaderSection(
+                      story: widget.story,
+                      currentIndex: _currentIndex,
+                      shouldLoadViewTime: !_imageIsLoading && !_userIsPausing,
+                      onLoadingComplete: (int completedIndex, bool isLastIndex) {
+                        if (isLastIndex) {
+                          widget.onStoryComplete?.call();
+                          return;
+                        }
+                        setState(() {
+                          _currentIndex = completedIndex + 1;
+                          _imageIsLoading = true;
+                        });
+                      },
                     ),
-                  ),
-                  Measurements.pageVerticalPadding.vs,
-                  StoryBottomSection(
-                    controller: _messageController,
-                    userTag: widget.story.userTag,
-                  ),
-                  Measurements.pageVerticalPadding.vs,
-                ],
-              ),
-            ],
+                    Measurements.pageVerticalPadding.vs,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Positioned.fill(
+                                  child: StoryImage(
+                                    imageUrl: widget.story.storyImages[_currentIndex].url,
+                                    onLoadingComplete: _scheduleLoadingDonePostFrameCallback,
+                                  ),
+                                ),
+                                Positioned.fill(
+                                  child: InvisibleGestureDetectors(
+                                    onNext: _onNext,
+                                    onPrevious: _onPrevious,
+                                    onHoldDown: _onHoldDown,
+                                    onRelease: _onRelease,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Measurements.pageVerticalPadding.vs,
+                    StoryBottomSection(
+                      controller: _messageController,
+                      userTag: widget.story.userTag,
+                    ),
+                    Measurements.pageVerticalPadding.vs,
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
