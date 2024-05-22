@@ -35,7 +35,7 @@ flutter run
 ### DESKTOP
 <p align="center">
   <img src="screenshots/img_3.png" width="35%"/>
-  <img src="screenshots/img_4.png" width="61%"/>
+  <img src="screenshots/img_4.png" width="62%"/>
 </p>
 <div></div>
 <img src="screenshots/img_5.png" width="70%" />
