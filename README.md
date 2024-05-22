@@ -34,12 +34,9 @@ flutter run
 
 ### DESKTOP
 <p align="center">
-  <img src="screenshots/img_3.png" width="36%"/>
-  <img src="screenshots/img_4.png" width="64%"/>
+  <img src="screenshots/img_3.png" width="35%"/>
+  <img src="screenshots/img_4.png" width="63%"/>
 </p>
 <div></div>
-<p align="center">
-  <img src="screenshots/img_5.png" width="20%" />
-</p>
 <img src="screenshots/img_5.png" width="70%" />
 <img src="screenshots/img_6.png" width="100%" />
